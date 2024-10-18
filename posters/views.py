@@ -43,6 +43,10 @@ def generar_imagen_vyro(descripcion, api_token):
     else:
         print("Error:", response.status_code)
         return None
+    
+#Renderiza el home
+def home(request):
+    return render(request, 'home.html')
 
 # Simulación de la función para crear un póster con Adobe Creative Cloud
 def crear_poster_adobe(imagen_ia_url, plantilla_url):
@@ -57,7 +61,7 @@ def crear_poster_adobe(imagen_ia_url, plantilla_url):
     return None
 
 # Vista principal para crear la propuesta
-def home(request):
+def paginaPrompt(request):
     if request.method == 'POST':
         job_file_name = 'no-file'
         template_image_name = 'no-image'
@@ -100,7 +104,7 @@ def home(request):
             'poster_url': quote(poster_filename)  # Pasar solo el nombre del archivo
         }))
 
-    return render(request, 'home.html')
+    return render(request, 'paginaPrompt.html')
 
 # Vista para confirmar y generar el póster
 def confirmacion(request, job_file_name, job_description, template_image_name, poster_url):

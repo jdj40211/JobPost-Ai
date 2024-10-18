@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('paginaPrompt/', views.paginaPrompt, name='paginaPrompt'),
     path(
         'confirmacion/<str:job_file_name>/<str:job_description>/<str:template_image_name>/<str:poster_url>/',
         views.confirmacion,

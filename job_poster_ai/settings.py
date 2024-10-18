@@ -58,7 +58,7 @@ ROOT_URLCONF = 'job_poster_ai.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Añade el directorio global de plantillas aquí
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,7 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
             ],
         },
-    },
+   },
 ]
 
 WSGI_APPLICATION = 'job_poster_ai.wsgi.application'
