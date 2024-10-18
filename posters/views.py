@@ -8,10 +8,13 @@ import os
 from urllib.parse import quote, unquote
 from docx import Document
 import PyPDF2
+from openai import OpenAI
 import openai
+import os
+import google.generativeai as genai
 
 # Configura tu clave API de OpenAI
-openai.api_key = os.getenv('OPENAI_API_KEY', 'tu_clave_API_aquí')
+genai.configure(api_key='AIzaSyDVjet7JX0216nprw9KRWozDzckWeUoOgE')
 
 def generar_imagen_vyro(descripcion, api_token):
     url = 'https://api.vyro.ai/v1/imagine/api/generations'
@@ -43,20 +46,19 @@ def generar_imagen_vyro(descripcion, api_token):
     else:
         print("Error:", response.status_code)
         return None
-    
-#Renderiza el home
+
+# Renderiza el home
 def home(request):
     return render(request, 'home.html')
 
 # Simulación de la función para crear un póster con Adobe Creative Cloud
 def crear_poster_adobe(imagen_ia_url, plantilla_url):
-    # Aquí deberías integrar la API de Adobe Creative Cloud
     response = requests.post('https://api.adobe.com/crear-poster', json={
         'imagen_ia_url': imagen_ia_url,
         'plantilla_url': plantilla_url,
     })
     if response.status_code == 200:
-        poster_url = response.json().get('url_poster')
+        poster_url = response.json().url_poster
         return poster_url
     return None
 
@@ -79,6 +81,7 @@ def paginaPrompt(request):
 
             # Generar el resumen usando OpenAI
             job_description = get_summary(file_text)
+            print("job_description:", job_description)
 
         # Subir la imagen de la plantilla
         if 'template_image' in request.FILES:
@@ -87,21 +90,21 @@ def paginaPrompt(request):
             template_image_name = fs.save(template_image.name, template_image)
 
         # Llamada a la IA para generar la imagen del puesto
-        imagen_ia_url = generar_imagen_vyro(job_description, 'vk-Gmt8Hrq6WDvG6skFMafutzp3b2xLFBKgS3NlvhyVczT2xH')
+        imagen_ia_url = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-WKFXBDqezTzE0Vp6LWY6fwrlagD3DlpRE6MExVYclqF4e')
 
         if imagen_ia_url is None:
             return HttpResponse("Error generando la imagen", status=500)
 
         # Extraer solo el nombre del archivo de la imagen
         poster_filename = os.path.basename(imagen_ia_url)
-        print("poster_filename:", quote(poster_filename))
+        print("poster_filename:", quote(poster_filename, encoding='utf-8'))
 
         # Redirigir a la página de confirmación con los argumentos necesarios
         return redirect(reverse('confirmacion', kwargs={
-            'job_file_name': quote(job_file_name),
-            'job_description': quote(job_description),
-            'template_image_name': quote(template_image_name),
-            'poster_url': quote(poster_filename)  # Pasar solo el nombre del archivo
+            'job_file_name': quote(job_file_name, encoding='utf-8'),
+            'job_description': quote(job_description, encoding='utf-8'),
+            'template_image_name': quote(template_image_name, encoding='utf-8'),
+            'poster_url': quote(poster_filename, encoding='utf-8')  # Pasar solo el nombre del archivo
         }))
 
     return render(request, 'paginaPrompt.html')
@@ -123,38 +126,49 @@ def image_selection(request):
 
         # Aquí puedes procesar la selección de la imagen
         if selection == 'like':
-            # Lógica para cuando al usuario le gusta la imagen
             return HttpResponse("Imagen seleccionada como 'Me gusta'")
         elif selection == 'dislike':
-            # Lógica para cuando al usuario no le gusta la imagen
             return HttpResponse("Imagen seleccionada como 'No me gusta'")
-    return redirect('home')  # Redirige a alguna otra vista
+    return redirect('home')
 
+# Función para extraer texto de un archivo PDF o DOCX
 def extract_text_from_file(file):
-    if file.name.endswith('.pdf'):
-        reader = PyPDF2.PdfReader(file)
-        text = ''
-        for page in range(len(reader.pages)):
-            text += reader.pages[page].extract_text()
-        return text
+    try:
+        if file.name.endswith('.pdf'):
+            reader = PyPDF2.PdfReader(file)
+            text = ''
+            for page in range(len(reader.pages)):
+                text += reader.pages[page].extract_text()
+            
+            return text.encode('utf-8').decode('utf-8')
 
-    elif file.name.endswith('.docx'):
-        doc = Document(file)
-        text = '\n'.join([para.text for para in doc.paragraphs])
-        return text
+        elif file.name.endswith('.docx'):
+            doc = Document(file)
+            text = '\n'.join([para.text for para in doc.paragraphs])
+            return text.encode('utf-8').decode('utf-8')
 
-    return ''  # Devolver cadena vacía si el archivo no es soportado
+        else:
+            return 'Unsupported file format.'
 
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+
+# Función para generar un resumen usando Gemini
 def get_summary(text):
-    # Generar el resumen usando OpenAI
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",  # O el modelo que prefieras
-        messages=[
-            {"role": "user", "content": f"Resume el siguiente texto: {text}"}
-        ],
-        max_tokens=150,  # Ajusta según sea necesario
-        temperature=0.5,
-    )
+    model = genai.GenerativeModel('gemini-1.5-flash')
+    try:
+        # Asegúrate de codificar el texto correctamente en UTF-8
+        text = text.encode('utf-8').decode('utf-8')
 
-    summary = response['choices'][0]['message']['content']
-    return summary
+        # Utiliza la nueva llamada de la API de Gemini para generar el resumen
+        response = model.generate_content(f'De que trabajo es la vacante que se menciona en el siguiente texto, solo menciona el nombre de el trabajo traducido al ingles: {text}')
+    
+        summary = response.text  # O ajusta según la estructura del objeto
+        return summary
+
+    except Exception as e:
+        return f"Error al generar el resumen: {e}"
+
+
+
