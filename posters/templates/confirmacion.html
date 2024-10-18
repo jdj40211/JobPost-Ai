@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Generada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #00698f;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #00698f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #00516d;
+        }
+    </style>
+</head>
+
+<body>
+    
+
+    <h1>Propuesta Generada</h1>
+
+    <p>Descripción del puesto: {{ job_description }}</p>
+
+    <!-- Mostrar la imagen generada por IA -->
+    <h2>Imagen generada:</h2>
+    <img src="{{ MEDIA_URL }}{{ poster_url }}" alt="Imagen generada por IA">
+
+    <!-- Botones para seleccionar si la imagen es aceptada -->
+    <div class="buttons">
+        <form method="post" action="{% url 'image_selection' %}">
+            {% csrf_token %}
+            <input type="hidden" name="poster_url" value="{{ poster_url }}">
+            <button type="submit" name="selection" value="like">Me gusta</button>
+            <button type="submit" name="selection" value="dislike">No me gusta</button>
+        </form>
+    </div>
+
+    <!-- Enlace para descargar el archivo original -->
+    <p><a href="{{ MEDIA_URL }}{{ template_image_name }}">Descargar plantilla</a></p>
+    <p><a href="{{ MEDIA_URL }}{{ job_file_name }}">Descargar documento del puesto</a></p>
+</body>
+
+</html>

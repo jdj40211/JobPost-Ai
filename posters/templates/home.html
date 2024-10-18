@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+
+
+    <title>JobPost + AI</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+
+
+
+    <nav class="navbar-bg-body-tertiary">
+        <div class="circle one"></div>
+        <div class="circleDos one"></div>
+        <div class="circle two"></div>
+
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/JobPostLogo(500x150).svg' %}" alt="JobPostLogo" width="150" height="50"
+                    class="logoJobPost">
+            </a>
+            <a class="nav-link" href="{% url 'home' %}">Soporte</a>
+        </div>
+    </nav>
+
+
+
+
+
+</head>
+
+<body>
+    <div class="containerSeccionUno">
+        <div class="contenedorUno">
+            <h1 class="textoEstiloUno">Impulsa tus procesos de Reclutamiento con IA</h1>
+            <p class="textoEstiloDos">Numerosas empresas, instituciones y reclutadores ustilizan JobPost para mejorar
+                significativamente sus procedimientos de reclutamiento.</p>
+            <div class="container text-center">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <img src="{% static 'images/perfilUno.svg' %}" alt="perfilUno" class="logosPerfiles one">
+                        <img src="{% static 'images/perfilDos.svg' %}" alt="perfilDos" class="logosPerfiles two">
+                        <img src="{% static 'images/perfilTres.svg' %}" alt="perfilTres" class="logosPerfiles three">
+                        <img src="{% static 'images/perfilCuatro.svg' %}" alt="perfilCuatro" class="logosPerfiles four">
+                    </div>
+                    <div class="col">
+                        <p class="textoConfianza">Más de 1.000 personas confían en nosotros.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="botonDemo">Crear Oferta</button>
+        </div>
+    </div>
+    
+</body>
+
+<footer>
+    <div class="footer">
+        <p>© 2024 JobPost + AI. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+</html>

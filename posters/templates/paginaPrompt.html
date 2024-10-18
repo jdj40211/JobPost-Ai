@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea Tu Oferta</title>
+</head>
+
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Subir el documento -->
+
+        <div class="mb-3">
+            <div class="row">
+                <!-- Input file oculto -->
+                <input type="file" id="job_file" name="job_file" accept=".pdf,.docx,.txt" class="uploadLogo"
+                    style="display: none;">
+                <!-- Botón personalizado con icono -->
+                <label for="job_file" class="file-upload-label" onclick="document.getElementById('job_file').click();">
+                    <img src="{% static 'images/uploadLogo.svg' %}" class="uploadLogo" alt="Upload icon">
+                    <span>Sube el documento con tu oferta laboral (PDF, DOCX, TXT):</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Escribir descripción del puesto -->
+        <label for="job_description">Descripción del puesto:</label><br>
+        <textarea id="job_description" name="job_description" rows="4" cols="50"></textarea><br><br>
+
+        <!-- Subir imagen de plantilla -->
+        <label for="template_image">Sube la plantilla (JPG, PNG):</label><br>
+        <input type="file" id="template_image" name="template_image" accept="image/png, image/jpeg"><br><br>
+
+        <!-- Botón para enviar -->
+        <button type="submit">Crear Propuesta</button>
+    </form>
+
+    <!-- Mensaje de éxito -->
+    {% if success %}
+    <p>¡Propuesta creada con éxito!</p>
+    {% endif %}
+
+    <!-- Enlace para descargar el archivo -->
+    {% if file_url %}
+    <p><a href="{{ file_url }}">Descargar archivo</a></p>
+    {% endif %}
+
+    <!-- Mostrar la imagen generada por DALL·E -->
+    {% if poster_url %}
+    <h2>Imagen generada:</h2>
+    <img src="{{ poster_url }}" alt="Imagen generada por IA" width="500px">
+    {% endif %}
+
+</body>
+
+</html>
