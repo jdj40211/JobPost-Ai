@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+
 header {
     background-color: #f8f9fa;
     
@@ -75,8 +78,15 @@ h1 {
 
 
 label {
-    display: block;
-    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif; /* Usa la fuente Poppins */
+    font-size: 18px; /* Tamaño del texto */
+    color: #333; /* Color del texto */
+    font-weight: 600; /* Hace el texto un poco más grueso */
+    text-align: center; /* Asegura que el texto esté centrado */
+    display: block; /* Hace que el label se comporte como un bloque */
+    margin: 10px auto; /* Centra el label horizontalmente */
+    width: 100%; /* Asegura que el texto use todo el ancho del contenedor */
+    max-width: 600px; /* Limita el ancho del label */
 }
 
 input[type="file"] {
@@ -84,11 +94,28 @@ input[type="file"] {
 }
 
 textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    margin-bottom: 20px;
+    width: 80% !important; /* Forzar ancho */
+    max-width: 1000px !important; /* Limitar el ancho máximo */
+    padding: 10px !important;
+    border-radius: 10px !important;
+    border: 2px solid #007bff !important;
+    font-family: 'Arial', sans-serif !important;
+    font-size: 16px !important;
+    background-color: #f9f9f9 !important;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1) !important;
+    resize: vertical !important;
+    outline: none !important;
+    transition: border-color 0.3s ease !important;
+    margin: 20px auto !important;
+    display: block !important;
 }
+
+textarea:focus {
+    border-color: #0056b3 !important;
+}
+
+
+
 
 
 button[type="submit"] {

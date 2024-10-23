@@ -12,6 +12,7 @@ from openai import OpenAI
 import openai
 import os
 import google.generativeai as genai
+import re
 
 # Configura tu clave API de OpenAI
 genai.configure(api_key='AIzaSyDVjet7JX0216nprw9KRWozDzckWeUoOgE')
@@ -26,7 +27,7 @@ def generar_imagen_vyro(descripcion, api_token):
     payload = {
         'prompt': (None, descripcion),
         'style_id': (None, '29'),
-        'aspect_ratio': (None, '9:16')
+        'aspect_ratio': (None, '1:1')
     }
 
     response = requests.post(url, headers=headers, files=payload)
@@ -51,16 +52,35 @@ def generar_imagen_vyro(descripcion, api_token):
 def home(request):
     return render(request, 'home.html')
 
-# Simulación de la función para crear un póster con Adobe Creative Cloud
-def crear_poster_adobe(imagen_ia_url, plantilla_url):
-    response = requests.post('https://api.adobe.com/crear-poster', json={
-        'imagen_ia_url': imagen_ia_url,
-        'plantilla_url': plantilla_url,
-    })
-    if response.status_code == 200:
-        poster_url = response.json().url_poster
-        return poster_url
-    return None
+def crear_poster(request):
+    # Obtener la imagen seleccionada de la sesión
+    selected_poster_url = request.session.get('selected_poster_url')
+
+    job_context = request.session.get('job_context')
+    # Bloque de texto con el contexto del empleo (job_context)
+    extraer_datos_empleo(request, job_context)
+
+    # Extraer el título y la descripción del trabajo del bloque de texto
+    job_title = request.session.get('job_title', 'Título no disponible')
+    job_description = request.session.get('job_description', 'Descripción no disponible')
+    contact_info = "contacto@empresa.com"
+    
+    # Información de contacto (esto puede ser dinámico también)
+    contact_info = "contacto@empresa.com"
+
+    if selected_poster_url:
+        context = {
+            'poster_url': selected_poster_url,
+            'job_title': job_title,
+            'job_description': job_description,
+            'contact_info': contact_info
+        }
+        return render(request, 'nueva_plantilla.html', context)
+    else:
+        return HttpResponse("No se ha seleccionado ninguna imagen.")
+
+
+
 
 # Vista principal para crear la propuesta
 def paginaPrompt(request):
@@ -79,9 +99,9 @@ def paginaPrompt(request):
             # Extraer texto del archivo subido
             file_text = extract_text_from_file(job_file)
 
-            # Generar el resumen usando OpenAI
-            job_description = get_summary(file_text)
-            print("job_description:", job_description)
+            job_context = get_summaryDescription(file_text)
+            request.session['job_context'] = job_context
+
 
         # Subir la imagen de la plantilla
         if 'template_image' in request.FILES:
@@ -124,11 +144,14 @@ def image_selection(request):
         selection = request.POST.get('selection')
         poster_url = request.POST.get('poster_url')
 
-        # Aquí puedes procesar la selección de la imagen
         if selection == 'like':
-            return HttpResponse("Imagen seleccionada como 'Me gusta'")
+            # Guardar la imagen seleccionada en la sesión
+            request.session['selected_poster_url'] = poster_url
+
+            return redirect('crear_poster')
         elif selection == 'dislike':
             return HttpResponse("Imagen seleccionada como 'No me gusta'")
+
     return redirect('home')
 
 # Función para extraer texto de un archivo PDF o DOCX
@@ -155,7 +178,7 @@ def extract_text_from_file(file):
 
 
 # Función para generar un resumen usando Gemini
-def get_summary(text):
+def get_summaryImage(text):
     model = genai.GenerativeModel('gemini-1.5-flash')
     try:
         # Asegúrate de codificar el texto correctamente en UTF-8
@@ -170,5 +193,69 @@ def get_summary(text):
     except Exception as e:
         return f"Error al generar el resumen: {e}"
 
+def get_summaryDescription(text):
+    model = genai.GenerativeModel('gemini-1.5-flash')
+    try:
+        # Asegúrate de codificar el texto correctamente en UTF-8
+        text = text.encode('utf-8').decode('utf-8')
+
+        # Utiliza la nueva llamada de la API de Gemini para generar el resumen
+        response = model.generate_content(f'De el siguiente texto dame los siguientes datos: Salario, Requisitos principales: {text}')
+    
+        summary = response.text  # O ajusta según la estructura del objeto
+        return summary
+
+    except Exception as e:
+        return f"Error al generar el resumen: {e}"
 
 
+
+def extraer_datos_empleo(request, job_context):
+    # Usamos expresiones regulares para capturar datos específicos del contexto
+    job_title_match = re.search(r'\*\*Vacante:\*\* (.+)', job_context)
+    salary_match = re.search(r'\*\*Salario:\*\* (.+)', job_context)
+    requisitos_match = re.search(r'\*\*Requisitos principales:\*\*\n(.+)', job_context, re.DOTALL)
+
+    # Si se encuentran coincidencias, asignamos los valores, de lo contrario usamos un valor predeterminado
+    job_title = job_title_match.group(1) if job_title_match else "Sin título"
+    salary = salary_match.group(1) if salary_match else "No especificado"
+    requisitos = requisitos_match.group(1).strip() if requisitos_match else "No especificado"
+
+    # Remover asteriscos y formatear la descripción
+    requisitos_limpios = re.sub(r'\*\*|\*', '', requisitos)
+
+    # Crear una descripción uniendo el salario y los requisitos sin asteriscos
+    job_description = f"Salario: {salary}\n\nRequisitos:\n{requisitos_limpios}"
+
+    # Guardar los datos en la sesión
+    request.session['job_title'] = job_title
+    request.session['job_description'] = job_description
+
+    return job_title, job_description
+
+
+def guardar_y_mostrar_post(request):
+    if request.method == 'POST':
+        selection = request.POST.get('selection')
+        print(f"Selection value: {selection}")  # Depuración
+        poster_html = request.POST.get('poster_html')  # Recibimos el HTML completo
+
+        if selection == 'like':
+            # Guardar el HTML del póster en la sesión
+            request.session['poster_html'] = poster_html
+
+            # Redirigir a una página que actuará como el post de Instagram
+            return redirect('ver_post_instagram')
+
+        elif selection == 'dislike':
+            return HttpResponse("Imagen seleccionada como 'No me gusta'")
+
+    return redirect('home')
+
+
+def ver_post_instagram(request):
+   # Obtener el HTML del póster desde la sesión
+    poster_html = request.session.get('poster_html', '')
+
+    # Renderizar la plantilla del post de Instagram con el contenido capturado
+    return render(request, 'ver_post.html', {'poster_html': poster_html})

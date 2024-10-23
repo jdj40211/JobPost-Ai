@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Póster de Vacante</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #e0f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .poster-container {
+      width: 100%;
+      max-width: 750px;
+      aspect-ratio: 9 / 16;
+      background-color: white;
+      border: 8px solid #007bff;
+      border-radius: 15px;
+      padding: 30px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    .poster-container:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .header {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .image-section {
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    #vacante-imagen {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .content {
+      margin: 20px 0;
+      text-align: justify;
+    }
+
+    .content h2 {
+      color: #007bff;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .content p {
+      font-size: 1.1rem;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 1rem;
+      color: #007bff;
+      margin-top: 20px;
+      border-top: 1px solid #007bff;
+      padding-top: 10px;
+    }
+
+    .like-dislike {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .like-button, .dislike-button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      margin: 10px;
+    }
+
+    .like-button:hover, .dislike-button:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+      .poster-container {
+        max-width: 100%;
+        font-size: 1rem;
+      }
+
+      .header h1 {
+        font-size: 1.5rem;
+      }
+
+      .content h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="poster-container" id="poster-container">
+      <div class="poster">
+        <div class="header">
+          <h1>Vacante: {{ job_title }}</h1>
+        </div>
+        <div class="image-section">
+          <img src="{{ MEDIA_URL }}{{ poster_url }}" alt="Imagen generada por IA" id="vacante-imagen">
+        </div>
+        <div class="content">
+          <h2>Descripción:</h2>
+          <p>{{ job_description }}</p>
+        </div>
+        <div class="footer">
+          <p>Para más información, contacta a: {{ contact_info }}</p>
+        </div>
+      </div>
+
+      <!-- Formulario para "Me gusta" o "No me gusta" -->
+      <div class="like-dislike">
+        <form method="POST" action="{% url 'guardar_y_mostrar_post' %}" id="likeForm">
+            {% csrf_token %}
+            <input type="hidden" name="poster_html" id="posterHtml">
+            <input type="hidden" name="selection" id="selection" value="like">  <!-- Campo oculto para 'Me gusta' -->
+            <button type="button" class="like-button" onclick="submitLike()">Me gusta</button>
+            <button type="submit" name="selection" value="dislike" class="dislike-button">No me gusta</button>
+        </form>     
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function submitLike() {
+        // Capturar el HTML de la página
+        var posterHtml = document.getElementById('poster-container').outerHTML;
+        document.getElementById('posterHtml').value = posterHtml;
+
+        // Cambiar el valor de selection a 'like'
+        document.getElementById('selection').value = 'like';
+
+        // Enviar el formulario
+        document.getElementById('likeForm').submit();
+    }
+</script>
+</body>
+
+</html>
