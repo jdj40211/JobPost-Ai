@@ -6,9 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'styles.css' %}">    
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 
-        
+
 
 
 
@@ -37,13 +37,10 @@
         </div>
     </nav>
 
-
-
-
-
 </head>
 
 <body>
+<script src="{% static 'js/carousel.js' %}"></script>
     <div class="containerSeccionUno">
         <div class="contenedorUno">
             <h1 class="textoEstiloUno">Impulsa tus procesos de Reclutamiento con IA</h1>
@@ -64,8 +61,10 @@
             </div>
             <button class="botonDemo" onclick="location.href='{% url 'paginaPrompt' %}'">Crear Oferta</button>
         </div>
+
     </div>
-    
+
+
 </body>
 
 <footer>

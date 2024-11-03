@@ -375,6 +375,33 @@ button[type="submit"]:hover {
     z-index: 2;
 }
 
+.carousel-container {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.2s ease-in-out;
+    gap: 20px;
+}
+
+.carousel-item {
+    min-width: 200px; /* Ajusta según el tamaño que necesites */
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.carousel-item img {
+    width: 100px; /* Tamaño de la imagen */
+    height: 100px;
+    border-radius: 50%;
+}
+
+
 .footer {
     background-color: #1f41bb;
     color: #ffffff;
@@ -383,3 +410,5 @@ button[type="submit"]:hover {
     text-align: center;
     height: auto;
 }
+
+
