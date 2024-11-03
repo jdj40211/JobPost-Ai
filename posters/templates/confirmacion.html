@@ -20,10 +20,12 @@
         img {
             max-width: 100%;
             height: auto;
+            margin-bottom: 20px;
         }
 
         .buttons {
-            margin-top: 20px;
+            margin-top: 10px;
+            margin-bottom: 20px;
         }
 
         button {
@@ -42,24 +44,47 @@
 </head>
 
 <body>
-    
-
     <h1>Propuesta Generada</h1>
 
     <p>Descripción del puesto: {{ job_description }}</p>
 
-    <!-- Mostrar la imagen generada por IA -->
-    <h2>Imagen generada:</h2>
-    <img src="{{ MEDIA_URL }}{{ poster_url }}" alt="Imagen generada por IA">
+    <!-- Mostrar las imágenes generadas por IA -->
+    <h2>Imágenes generadas:</h2>
 
-    <!-- Botones para seleccionar si la imagen es aceptada -->
-    <div class="buttons">
-        <form method="post" action="{% url 'image_selection' %}">
-            {% csrf_token %}
-            <input type="hidden" name="poster_url" value="{{ poster_url }}">
-            <button type="submit" name="selection" value="like">Me gusta</button>
-            <button type="submit" name="selection" value="dislike">No me gusta</button>
-        </form>
+    <div>
+        <img src="{{ MEDIA_URL }}{{ poster_url1 }}" alt="Imagen generada por IA 1">
+        <div class="buttons">
+            <form method="post" action="{% url 'image_selection' %}">
+                {% csrf_token %}
+                <input type="hidden" name="poster_url" value="{{ poster_url1 }}">
+                <button type="submit" name="selection" value="like">Me gusta</button>
+                <button type="submit" name="selection" value="dislike">No me gusta</button>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <img src="{{ MEDIA_URL }}{{ poster_url2 }}" alt="Imagen generada por IA 2">
+        <div class="buttons">
+            <form method="post" action="{% url 'image_selection' %}">
+                {% csrf_token %}
+                <input type="hidden" name="poster_url" value="{{ poster_url2 }}">
+                <button type="submit" name="selection" value="like">Me gusta</button>
+                <button type="submit" name="selection" value="dislike">No me gusta</button>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <img src="{{ MEDIA_URL }}{{ poster_url3 }}" alt="Imagen generada por IA 3">
+        <div class="buttons">
+            <form method="post" action="{% url 'image_selection' %}">
+                {% csrf_token %}
+                <input type="hidden" name="poster_url" value="{{ poster_url3 }}">
+                <button type="submit" name="selection" value="like">Me gusta</button>
+                <button type="submit" name="selection" value="dislike">No me gusta</button>
+            </form>
+        </div>
     </div>
 
     <!-- Enlace para descargar el archivo original -->
