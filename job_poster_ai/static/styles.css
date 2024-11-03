@@ -1,143 +1,191 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-
-header {
-    background-color: #f8f9fa;
-    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
 
 html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
-    
 }
 
+header {
+    background-color: #f8f9fa;
+}
 
 h1 {
     color: #02015A;
     font-family: 'Poppins', sans-serif;
     font-size: 58px;
-    
 }
 
+/* Section Styles */
 .containerSeccionUno {
     background-color: #f8f9fa;
-    width: 100vw; 
-    height: 100%; 
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    padding-top: 100px;
+    padding-top: 50px;
+    overflow: hidden; /* Prevents content from overflowing */
 }
 
 
-.contenedorUno{
-    
+
+.contenedorUno {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    justify-content: flex-start;
-    align-content: center;
     align-items: center;
-    height: auto;
-    padding: 0;
-    position: relative;
     width: 50%;
     background-color: #f8f9fa;
 }
 
-.textoEstiloUno{
-    color: #02015A;
+.contenedorTres {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+    align-items: center; /* Centers content horizontally */
+    width: 50%;
+    height: 100vh; /* Full viewport height */
+    margin: 0 auto; /* Centers content horizontally within its parent */
+    text-align: center;
+}
+
+.contenedorTres {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px; /* Adjust spacing between elements */
+    width: 50%;
+    height: 100vh;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.gradient-label {
+    position: relative;
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 14px;
     font-family: 'Poppins', sans-serif;
+    background-color: #f3f7fb; /* Solid background color */
+    color: transparent; /* Make text transparent */
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+.gradient-label::before {
+    content: "Como funciona"; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(279deg, rgb(161, 94, 232) 0%, rgb(109, 141, 255) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+.textoEstiloUno {
+    color: #02015A;
+    font-size: 58px;
     text-align: center;
     font-weight: 500;
     line-height: 110%;
-    font-size: 58px;
     padding-bottom: 50px;
-    font-style: normal;
     z-index: 4;
-
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
 }
 
-
-.textoEstiloDos{
+.textoEstiloDos {
     color: #4e5774;
-    font-family: 'Poppins', sans-serif;
     font-size: 18px;
     font-weight: 400;
     line-height: 150%;
-    font-style: normal;
     text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
     z-index: 2;
 }
 
-
-label {
-    font-family: 'Poppins', sans-serif; /* Usa la fuente Poppins */
-    font-size: 18px; /* Tamaño del texto */
-    color: #333; /* Color del texto */
-    font-weight: 600; /* Hace el texto un poco más grueso */
-    text-align: center; /* Asegura que el texto esté centrado */
-    display: block; /* Hace que el label se comporte como un bloque */
-    margin: 10px auto; /* Centra el label horizontalmente */
-    width: 100%; /* Asegura que el texto use todo el ancho del contenedor */
-    max-width: 600px; /* Limita el ancho del label */
+/* Profile Images Alignment */
+.logosPerfiles {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: -10px;
+    z-index: 1;
 }
 
-input[type="file"] {
-    margin-bottom: 20px;
+.textoConfianza {
+    color: #9ca3bd;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 100%;
+    text-align: left;
+    margin-left: 10px;
+    font-family: 'Poppins', sans-serif;
 }
 
-textarea {
-    width: 80% !important; /* Forzar ancho */
-    max-width: 1000px !important; /* Limitar el ancho máximo */
-    padding: 10px !important;
-    border-radius: 10px !important;
-    border: 2px solid #007bff !important;
-    font-family: 'Arial', sans-serif !important;
-    font-size: 16px !important;
-    background-color: #f9f9f9 !important;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1) !important;
-    resize: vertical !important;
-    outline: none !important;
-    transition: border-color 0.3s ease !important;
-    margin: 20px auto !important;
-    display: block !important;
-}
-
-textarea:focus {
-    border-color: #0056b3 !important;
-}
-
-
-
-
-
-button[type="submit"] {
+/* Button with Hover Transition */
+.botonDemo {
     background-color: #00bf63;
     color: #ffffff;
-    padding: 10px 20px;
+    width: 185px;
+    height: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
     border: none;
     border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
     cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto; /* Esto centra el botón horizontalmente */
 }
 
-button[type="submit"]:hover {
+
+.botonDemo:hover {
     background-color: #00587a;
+    color: #ffffff;
 }
 
+/* Form Label Styles */
+label {
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+    text-align: center;
+    display: block;
+    margin: 10px auto;
+    max-width: 600px;
+    font-family: 'Poppins', sans-serif;
+}
 
+/* Navbar */
 .navbar-bg-body-tertiary {
-    
     z-index: 1;
     background-color: #f8f9fa;
     padding: 10px 20px;
@@ -145,7 +193,6 @@ button[type="submit"]:hover {
     padding-right: 10%;
     position: sticky;
 }
-
 
 .container-fluid {
     display: flex;
@@ -157,62 +204,10 @@ button[type="submit"]:hover {
     width: 50%;
     justify-content: space-between;
     z-index: 2;
-    position: sticky;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-.navbar .navbar-brand {
-    justify-self: flex-start;
-    margin-right: auto;
-}
-
-.logoJobPost {
-    display: flex;
-    justify-content: flex-start;
-    padding-left: 25px;
-}
-
-
-.mb-3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px auto;
-    width: 50%;
-    background-color: #e7e9ec;
-}
-
-.file-upload-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    color: #000000;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.uploadLogo {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
-}
-
-
-
-.nav-link {
-    color: #000000;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-}
-
-
+/* Background Circles */
 .circle {
     width: 500px;
     height: 500px;
@@ -228,158 +223,158 @@ button[type="submit"]:hover {
     width: 500px;
     height: 500px;
     border-radius: 50%;
-    background: radial-gradient(circle at center,#00E0FF, #30c4ab);
+    background: radial-gradient(circle at center, #00E0FF, #30c4ab);
     position: absolute;
     filter: blur(100px);
     opacity: 1;
     z-index: -1;
 }
-
-.circleTres {
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle at center,#00bf63, #77ff91);
-    position: absolute;
-    filter: blur(100px);
-    opacity: 1;
-    z-index: -1;
-}
-
 
 .circle.one {
     top: -200px;
     left: -100px;
-    justify-self: flex-start;
-    position: absolute;
 }
 
 .circle.two {
     top: -300px;
     left: 3000px;
-    justify-self: end;
-    right: 0;
-
 }
 
 .circleDos.one {
     top: -300px;
     left: 300px;
-    position: absolute;
 }
 
 .circleDos.two {
     top: -700px;
     left: 1500px;
-    position: absolute;
-    justify-content: end;
 }
 
-
-
-
-.miniContenedor {
+/* Carousel Container */
+.containerCarousel {
     display: flex;
-    justify-content: flex-end;
-    align-content: flex-end ;
-    position: relative; 
-    width: 100%; 
-    height: auto; 
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    padding-bottom: 100px;
+    padding-top: 50px;
 }
 
-
-.logosPerfiles {
-    border-radius: 50%;
-    justify-content: flex-end;
-    align-content: flex-end;
-    width: 50px;
-    height: 50px;
-    position: relative; 
-    margin-left: -30px; 
-    z-index: 1; 
+.carousel-item {
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
 }
 
-
-.logosPerfiles.one {
-    z-index: 4;
+.carousel-item img {
+    width: 100%;
+    max-height: 70vh;
 }
 
-.logosPerfiles.two {
-    z-index: 3;
+/* Logo Carousel Container */
+.logo-carousel {
+    overflow: hidden;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    position: relative;
+    padding-bottom: 50px;
+    padding-top: 50px;
 }
 
-.logosPerfiles.three {
+/* Track that holds all logos */
+.logo-carousel-track {
+    display: flex;
+    gap: 30px;
+    white-space: nowrap;
+    animation: scroll 30s linear infinite;
+}
+
+/* Individual logo styling */
+.carousel-logo {
+    width: 100px;
+    height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.carousel-logo:hover {
+    filter: grayscale(0%);
+}
+
+/* Fading effect for smooth edges */
+.logo-carousel:before,
+.logo-carousel:after {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    content: "";
     z-index: 2;
 }
 
-.logosPerfiles.four {
-    z-index: 1;
+.logo-carousel:before {
+    left: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
 }
 
+.logo-carousel:after {
+    right: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
+}
 
-.botonDemo{
-    border-radius: 5px;
-    background-color: #00bf63;
-    color: #ffffff;
-    width: 185px;
-    height: 50px;
+/* Keyframes for scrolling animation */
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.columnas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates 3 equal-width columns */
+    gap: 40px; /* Adds space between the items */
+    justify-items: center; /* Centers items horizontally within each column */
+    margin-top: 40px; /* Adds space above the grid */
+}
+
+.columna {
+    text-align: center; /* Centers text and images within each column */
+    max-width: 250px; /* Optional: limits the width of each column */
+}
+
+.iconos {
+    width: 60px; /* Adjust the size of the icons */
+    height: auto;
+    margin-bottom: 16px; /* Adds space below each icon */
+}
+
+.textoEstiloTres {
     font-size: 20px;
     font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
+    color: #02015A; /* Dark blue color for the title */
+    margin-bottom: 8px;
 }
 
-.row{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
+.textoEstiloCuatro {
+    font-size: 14px;
+    color: #4e5774; /* Lighter gray color for the description */
+    line-height: 1.5;
 }
 
 
-
-.col{
-    display: flex;
-    flex: auto;
-    justify-content: flex-start;
-    align-items: center;
-    height: auto;
-    padding: 0;
-    
-}
-
-.textoConfianza {
-    color: #9ca3bd;
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 100%;
-    text-align: left;  
-    z-index: 2;
-    position: relative;
-    margin-left: 150px;
-    width: 100%;
-    justify-content: flex-start;
-    
-}
-
-.containerSeccionDos{
-    padding-top: 60px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 2;
-}
-
+/* Footer */
 .footer {
     background-color: #1f41bb;
     color: #ffffff;
     padding: 10px 20px;
     margin-top: 20px;
     text-align: center;
-    height: auto;
 }
