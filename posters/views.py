@@ -13,6 +13,38 @@ import os
 import google.generativeai as genai
 import re
 import uuid
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('paginaPrompt')  # Cambia esto por tu vista de redirección después de iniciar sesión
+        else:
+            # Maneja el error de login fallido
+            return render(request, 'login.html', {
+                'error': 'Credenciales inválidas',
+                'show_register': True  # Indica que se debe mostrar el botón de registro
+            })
+    return render(request, 'login.html')
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirige a la página de inicio de sesión
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
 
 # Configura tu clave API de Gemini
 genai.configure(api_key='AIzaSyDVjet7JX0216nprw9KRWozDzckWeUoOgE')
