@@ -8,13 +8,49 @@ import os
 from urllib.parse import quote, unquote
 from docx import Document
 import PyPDF2
-from openai import OpenAI
-import openai
+from django.http import JsonResponse
 import os
 import google.generativeai as genai
 import re
+import uuid
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
 
-# Configura tu clave API de OpenAI
+# Renderiza el home
+def home(request):
+    return render(request, 'home.html')
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('paginaPrompt')  # Cambia esto por tu vista de redirección después de iniciar sesión
+        else:
+            # Maneja el error de login fallido
+            return render(request, 'login.html', {
+                'error': 'Credenciales inválidas',
+                'show_register': True  # Indica que se debe mostrar el botón de registro
+            })
+    return render(request, 'login.html')
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirige a la página de inicio de sesión
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
+
+# Configura tu clave API de Gemini
 genai.configure(api_key='AIzaSyDVjet7JX0216nprw9KRWozDzckWeUoOgE')
 
 def generar_imagen_vyro(descripcion, api_token):
@@ -33,8 +69,9 @@ def generar_imagen_vyro(descripcion, api_token):
     response = requests.post(url, headers=headers, files=payload)
 
     if response.status_code == 200:
-        # Nombre y ruta del archivo a guardar
-        file_name = 'image.jpg'
+        # Generar un nombre de archivo único usando UUID
+        unique_id = uuid.uuid4().hex
+        file_name = f'image_{unique_id}.jpg'
         file_path = os.path.join(settings.MEDIA_ROOT, file_name)
 
         # Guardar el contenido de la imagen en el archivo
@@ -48,9 +85,7 @@ def generar_imagen_vyro(descripcion, api_token):
         print("Error:", response.status_code)
         return None
 
-# Renderiza el home
-def home(request):
-    return render(request, 'home.html')
+
 
 def crear_poster(request):
     # Obtener la imagen seleccionada de la sesión
@@ -98,10 +133,8 @@ def paginaPrompt(request):
 
             # Extraer texto del archivo subido
             file_text = extract_text_from_file(job_file)
-
             job_context = get_summaryDescription(file_text)
             request.session['job_context'] = job_context
-
 
         # Subir la imagen de la plantilla
         if 'template_image' in request.FILES:
@@ -109,33 +142,37 @@ def paginaPrompt(request):
             fs = FileSystemStorage()
             template_image_name = fs.save(template_image.name, template_image)
 
-        # Llamada a la IA para generar la imagen del puesto
-        imagen_ia_url = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-WKFXBDqezTzE0Vp6LWY6fwrlagD3DlpRE6MExVYclqF4e')
-
-        if imagen_ia_url is None:
-            return HttpResponse("Error generando la imagen", status=500)
-
-        # Extraer solo el nombre del archivo de la imagen
-        poster_filename = os.path.basename(imagen_ia_url)
-        print("poster_filename:", quote(poster_filename, encoding='utf-8'))
+        # Llamada a la IA para generar las 3 imágenes del puesto
+        imagen_ia_url = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-YhGqtkpc2KuFM4F0Byh4D0HhpFQN3gQ2LZoBPnP6mcVP2SgV')
+        print(imagen_ia_url)
+        imagen_ia_url2 = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-YhGqtkpc2KuFM4F0Byh4D0HhpFQN3gQ2LZoBPnP6mcVP2SgV')
+        print(imagen_ia_url2)
+        imagen_ia_url3 = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-YhGqtkpc2KuFM4F0Byh4D0HhpFQN3gQ2LZoBPnP6mcVP2SgV')
+        print(imagen_ia_url3)
+        if not all([imagen_ia_url, imagen_ia_url2, imagen_ia_url3]):
+            return HttpResponse("Error generando las imágenes", status=500)
 
         # Redirigir a la página de confirmación con los argumentos necesarios
         return redirect(reverse('confirmacion', kwargs={
             'job_file_name': quote(job_file_name, encoding='utf-8'),
             'job_description': quote(job_description, encoding='utf-8'),
             'template_image_name': quote(template_image_name, encoding='utf-8'),
-            'poster_url': quote(poster_filename, encoding='utf-8')  # Pasar solo el nombre del archivo
+            'poster_url1': quote(os.path.basename(imagen_ia_url), encoding='utf-8'),
+            'poster_url2': quote(os.path.basename(imagen_ia_url2), encoding='utf-8'),
+            'poster_url3': quote(os.path.basename(imagen_ia_url3), encoding='utf-8')
         }))
 
     return render(request, 'paginaPrompt.html')
 
 # Vista para confirmar y generar el póster
-def confirmacion(request, job_file_name, job_description, template_image_name, poster_url):
+def confirmacion(request, job_file_name, job_description, template_image_name, poster_url1, poster_url2, poster_url3):
     context = {
         'job_file_name': unquote(job_file_name),
         'job_description': unquote(job_description),
         'template_image_name': unquote(template_image_name),
-        'poster_url': unquote(poster_url),
+        'poster_url1': unquote(poster_url1),
+        'poster_url2': unquote(poster_url2),
+        'poster_url3': unquote(poster_url3),
     }
     return render(request, 'confirmacion.html', context)
 
@@ -181,7 +218,7 @@ def extract_text_from_file(file):
 def get_summaryImage(text):
     model = genai.GenerativeModel('gemini-1.5-flash')
     try:
-        # Asegúrate de codificar el texto correctamente en UTF-8
+        
         text = text.encode('utf-8').decode('utf-8')
 
         # Utiliza la nueva llamada de la API de Gemini para generar el resumen
@@ -196,7 +233,7 @@ def get_summaryImage(text):
 def get_summaryDescription(text):
     model = genai.GenerativeModel('gemini-1.5-flash')
     try:
-        # Asegúrate de codificar el texto correctamente en UTF-8
+        
         text = text.encode('utf-8').decode('utf-8')
 
         # Utiliza la nueva llamada de la API de Gemini para generar el resumen
@@ -254,8 +291,62 @@ def guardar_y_mostrar_post(request):
 
 
 def ver_post_instagram(request):
-   # Obtener el HTML del póster desde la sesión
+    # Obtener el HTML del póster y la descripción del trabajo desde la sesión
     poster_html = request.session.get('poster_html', '')
+    job_description = request.session.get('job_description', 'Descripción no disponible')
 
-    # Renderizar la plantilla del post de Instagram con el contenido capturado
-    return render(request, 'ver_post.html', {'poster_html': poster_html})
+    # Renderizar la plantilla del post de Instagram con el contenido capturado y la descripción
+    return render(request, 'ver_post.html', {
+        'poster_html': poster_html,
+        'job_description': job_description
+    })
+
+
+
+
+
+#Funciones creación de poster IG
+# Función para crear un contenedor de imagen
+def crear_contenedor(access_token, instagram_account_id, image_url, caption):
+    url = f'https://graph.facebook.com/v15.0/{instagram_account_id}/media'
+    params = {
+        'image_url': image_url,
+        'caption': caption,
+        'access_token': access_token
+    }
+    response = requests.post(url, params=params)
+    data = response.json()
+    return data.get('id')
+
+# Función para publicar el contenedor
+def publicar_contenedor(access_token, instagram_account_id, creation_id):
+    url = f'https://graph.facebook.com/v15.0/{instagram_account_id}/media_publish'
+    params = {
+        'creation_id': creation_id,
+        'access_token': access_token
+    }
+    response = requests.post(url, params=params)
+    return response.json()
+
+# Vista para manejar la publicación en Instagram
+def publicar_poster_instagram(request):
+    if request.method == 'POST':
+        data = request.json()
+        image_url = data.get("image_url")
+        caption = data.get("caption")
+
+        access_token = settings.INSTAGRAM_ACCESS_TOKEN
+        instagram_account_id = settings.INSTAGRAM_ACCOUNT_ID
+
+        # Crea y publica el contenedor
+        creation_id = crear_contenedor(access_token, instagram_account_id, image_url, caption)
+        if creation_id:
+            result = publicar_contenedor(access_token, instagram_account_id, creation_id)
+            if "id" in result:
+                return JsonResponse({"status": "success", "message": "Publicado en Instagram"})
+            else:
+                return JsonResponse({"status": "error", "message": result.get("error", "Error al publicar")})
+        else:
+            return JsonResponse({"status": "error", "message": "Error al crear el contenedor"})
+    else:
+        return JsonResponse({"status": "error", "message": "Método no permitido"}, status=405)
