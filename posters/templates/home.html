@@ -40,31 +40,93 @@
 </head>
 
 <body>
-<script src="{% static 'js/carousel.js' %}"></script>
+
     <div class="containerSeccionUno">
         <div class="contenedorUno">
             <h1 class="textoEstiloUno">Impulsa tus procesos de Reclutamiento con IA</h1>
-            <p class="textoEstiloDos">Numerosas empresas, instituciones y reclutadores ustilizan JobPost para mejorar
+            <p class="textoEstiloDos">Numerosas empresas, instituciones y reclutadores utilizan JobPost para mejorar
                 significativamente sus procedimientos de reclutamiento.</p>
             <div class="container text-center">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <img src="{% static 'images/perfilUno.svg' %}" alt="perfilUno" class="logosPerfiles one">
-                        <img src="{% static 'images/perfilDos.svg' %}" alt="perfilDos" class="logosPerfiles two">
-                        <img src="{% static 'images/perfilTres.svg' %}" alt="perfilTres" class="logosPerfiles three">
-                        <img src="{% static 'images/perfilCuatro.svg' %}" alt="perfilCuatro" class="logosPerfiles four">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-auto d-flex align-items-center">
+                        <img src="{% static 'images/perfilUno.svg' %}" alt="perfilUno" class="logosPerfiles">
+                        <img src="{% static 'images/perfilDos.svg' %}" alt="perfilDos" class="logosPerfiles">
+                        <img src="{% static 'images/perfilTres.svg' %}" alt="perfilTres" class="logosPerfiles">
+                        <img src="{% static 'images/perfilCuatro.svg' %}" alt="perfilCuatro" class="logosPerfiles">
                     </div>
-                    <div class="col">
+                    <div class="col-auto">
                         <p class="textoConfianza">Más de 1.000 personas confían en nosotros.</p>
                     </div>
                 </div>
             </div>
             <button class="botonDemo" onclick="location.href='{% url 'login' %}'">Crear Oferta</button>
         </div>
+    </div>
 
+    <div class="containerCarousel">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="{% static 'images/testimonio1.svg' %}" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{% static 'images/testimonio2.svg' %}" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{% static 'images/testimonio3.svg' %}" alt="Third slide">
+                </div>
+            </div>
+        </div>
     </div>
 
 
+
+    <div class="containerSeccionDos">
+        <div class="contenedorDos">
+            <div class="textoEstiloDos">Recomendado por las más grandes empresas</div>
+            <div class="logo-carousel">
+                <div class="logo-carousel-track">
+                    <!-- Actual logos -->
+                    <img src="{% static 'images/logoSura.svg' %}" alt="Logo Sura" class="carousel-logo">
+                    <img src="{% static 'images/logoExito.svg' %}" alt="Logo Exito" class="carousel-logo">
+                    <img src="{% static 'images/logoStar.svg' %}" alt="Logo Star" class="carousel-logo">
+                    <img src="{% static 'images/logoWom.svg' %}" alt="Logo Wom" class="carousel-logo">
+                    <img src="{% static 'images/logoIsa.svg' %}" alt="Logo Isa" class="carousel-logo">
+                    <img src="{% static 'images/logoConfama.svg' %}" alt="Logo Confama" class="carousel-logo">
+                    <img src="{% static 'images/logoHaceb.svg' %}" alt="Logo Haceb" class="carousel-logo">
+                    <img src="{% static 'images/logoAra.svg' %}" alt="Logo Ara" class="carousel-logo">
+                </div>
+            </div>
+        </div>
+        <div class="contenedorTres">
+            <div class="gradient-label">Como funciona</div>
+            <h1 class="textoEstiloUno">Crea propuestas de trabajo ganadoras facilmente.</h1>
+            <p class="textoEstiloDos">Herramienta de inteligencia artificial de última generación y fácil de usar y
+                análisis de crecimiento diseñada para impulsar la conversión, la participación y la retención de los
+                usuarios.</p>
+
+            <div class="columnas">
+                <div class="columna">
+                    <img src="{% static 'images/oferta.svg' %}" alt="Crear Oferta" class="iconos">
+                    <h2 class="textoEstiloTres">Crea tu oferta</h2>
+                    <p class="textoEstiloCuatro">Crea tu oferta de trabajo en pocos minutos.</p>
+                </div>
+                <div class="columna">
+                    <img src="{% static 'images/analisis.svg' %}" alt="Analisis" class="iconos">
+                    <h2 class="textoEstiloTres">Análisis</h2>
+                    <p class="textoEstiloCuatro">Recibe un análisis detallado de tu oferta.</p>
+                </div>
+                <div class="columna">
+                    <img src="{% static 'images/contratacion.svg' %}" alt="Contratacion" class="iconos">
+                    <h2 class="textoEstiloTres">Contratación</h2>
+                    <p class="textoEstiloCuatro">Contrata al mejor candidato para tu empresa.</p>
+                </div>
+            </div>
+            <button class="botonDemo" onclick="location.href='{% url 'login' %}'">Crear Oferta</button>
+        </div>
+
+
+        <script src="{% static 'js/carousel.js' %}"></script>
 </body>
 
 <footer>
