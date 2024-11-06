@@ -33,12 +33,15 @@
 
     <div class="containerSeccionUno">
         <h1 class="textoEstiloUno">Sube el documento con tu oferta laboral para comenzar</h1>
+        <p class="textoEstiloDos">La propuesta debe incluir el título del puesto, descripción de funciones, requisitos
+            específicos, salario o beneficios económicos, tipo de contrato, y modalidad de trabajo (remoto, presencial o
+            híbrido)</p>
         <div class="form-container">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 <!-- Contenedor de carga de archivo con label asociado -->
-                <div class="upload-container">
+                <div class="upload-container" id="upload-container">
                     <label for="job_file" class="file-upload-label">
                         <img src="{% static 'images/uploadLogo.svg' %}" class="uploadLogo" alt="Upload icon">
                         <div class="upload-text">
@@ -48,38 +51,33 @@
                     </label>
                 </div>
 
-                <!-- Input oculto para subir el archivo -->
                 <input type="file" id="job_file" name="job_file" accept=".pdf,.docx,.txt" class="d-none">
 
-                <!-- Escribir descripción del puesto -->
                 <label for="job_description">Descripción de imagen a generar:</label><br>
                 <textarea id="job_description" name="job_description" rows="4" cols="50"
                     class="custom-textarea"></textarea><br><br>
 
-                <!-- Botón para enviar -->
-                <button class="btn" type="submit">
-                    <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1"
-                        class="sparkle">
-                        <path
-                            d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z">
-                        </path>
-                    </svg>
-
-                    <span class="text">Generate</span>
-                </button>
+                <div class="button-container">
+                    <button class="custom-btn" type="submit">
+                        <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1"
+                            class="sparkle">
+                            <path
+                                d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z">
+                            </path>
+                        </svg>
+                        <span class="text">Crear Oferta</span>
+                    </button>
+                </div>
             </form>
 
-            <!-- Mensaje de éxito -->
             {% if success %}
             <p>¡Propuesta creada con éxito!</p>
             {% endif %}
 
-            <!-- Enlace para descargar el archivo -->
             {% if file_url %}
             <p><a href="{{ file_url }}">Descargar archivo</a></p>
             {% endif %}
 
-            <!-- Mostrar la imagen generada por DALL·E -->
             {% if poster_url %}
             <h2>Imagen generada:</h2>
             <img src="{{ poster_url }}" alt="Imagen generada por IA" width="500px">
@@ -89,8 +87,23 @@
 
     <!-- Pantalla de carga -->
     <div id="loading-screen" class="loading-screen d-none">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Cargando...</span>
+        <div class="loader">
+            <div class="cell d-0"></div>
+            <div class="cell d-1"></div>
+            <div class="cell d-2"></div>
+
+            <div class="cell d-1"></div>
+            <div class="cell d-2"></div>
+
+
+            <div class="cell d-2"></div>
+            <div class="cell d-3"></div>
+
+
+            <div class="cell d-3"></div>
+            <div class="cell d-4"></div>
+
+
         </div>
         <p>Generando imágenes, por favor espera...</p>
     </div>

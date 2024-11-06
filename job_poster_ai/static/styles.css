@@ -262,7 +262,8 @@ label {
     position: relative;
     width: 100%;
     padding-top: 50px;
-    padding-bottom: 50px; /
+    padding-bottom: 80px; 
+    margin-bottom: 100px;
 }
 
 .carousel {
@@ -280,6 +281,9 @@ label {
     object-fit: contain;
 }
 
+.contedorDos{
+    margin-top: 80px;
+}
 
 .carousel-control-prev,
 .carousel-control-next {
@@ -351,14 +355,15 @@ label {
 .wrapper {
     overflow: hidden;
     width: 100%;
-    margin-top: 0px;
+    margin-top: 30px;
     margin-bottom: 50px;
 }
 
 .logo-track {
+    padding-top: 50px;
     display: flex;
-    width: calc(150px * 16);
-    animation: scroll 30s linear infinite;
+    width: calc(150px * 24);
+    animation: scroll 35s linear infinite;
 }
 
 .logo-track img {

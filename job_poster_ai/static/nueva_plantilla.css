@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     height: 100%;
     width: 100%;
     overflow-x: hidden;
@@ -13,7 +14,7 @@ html, body {
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 20px; 
+    gap: 20px;
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -42,7 +43,8 @@ html, body {
     overflow: hidden;
 }
 
-.poster-header-1, .poster-footer-1 {
+.poster-header-1,
+.poster-footer-1 {
     background-color: #007bff;
     color: #ffffff;
     padding: 10px;
@@ -82,7 +84,8 @@ html, body {
     overflow: hidden;
 }
 
-.poster-header-2, .poster-footer-2 {
+.poster-header-2,
+.poster-footer-2 {
     background-color: #ff8c00;
     color: #ffffff;
     padding: 10px;
@@ -122,7 +125,8 @@ html, body {
     overflow: hidden;
 }
 
-.poster-header-3, .poster-footer-3 {
+.poster-header-3,
+.poster-footer-3 {
     background-color: #28a745;
     color: #ffffff;
     padding: 10px;
@@ -181,8 +185,8 @@ html, body {
     margin-top: 10px;
 }
 
-.like-button{
-    background-color: #28a745; 
+.like-button {
+    background-color: #28a745;
     color: white;
     border: none;
     padding: 8px 15px;
@@ -192,8 +196,10 @@ html, body {
     transition: background-color 0.3s ease;
     margin: 5px;
 }
+
 .dislike-button {
-    background-color: #dc3545; /* Rojo para "No me gusta" */
+    background-color: #dc3545;
+    /* Rojo para "No me gusta" */
     color: white;
     border: none;
     padding: 8px 15px;
@@ -230,6 +236,60 @@ html, body {
     justify-content: space-between;
     z-index: 2;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sección de Descarga */
+.download-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    background: linear-gradient(120deg, #4a90e2, #6a8efb);
+    border-radius: 12px;
+    color: #fff;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.download-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.download-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.download-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.download-button {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #4a90e2;
+    background-color: #fff;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.download-button:hover {
+    background-color: #00bf63;
+    color: #fff;
 }
 
 footer {
