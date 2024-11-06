@@ -244,6 +244,17 @@ textarea:focus {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.nav-link{
+    color: #000000;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-right: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
 .circle {
     width: 500px;
     height: 500px;

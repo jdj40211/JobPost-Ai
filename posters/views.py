@@ -141,11 +141,11 @@ def paginaPrompt(request):
             template_image_name = fs.save(template_image.name, template_image)
 
         # Llamada a la IA para generar las 3 imágenes del puesto
-        imagen_ia_url = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-u7ZDPxPCdTms2z2B6hPWVwiBm3Z9225YSoAM1GVFeFQ5Jr')
+        imagen_ia_url = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-sYFsLKPBxj7VAs89pdQxfzlviGMF58Dh0roVhI8magBM3')
         print(imagen_ia_url)
-        imagen_ia_url2 = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-u7ZDPxPCdTms2z2B6hPWVwiBm3Z9225YSoAM1GVFeFQ5Jr')
+        imagen_ia_url2 = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-sYFsLKPBxj7VAs89pdQxfzlviGMF58Dh0roVhI8magBM3')
         print(imagen_ia_url2)
-        imagen_ia_url3 = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-u7ZDPxPCdTms2z2B6hPWVwiBm3Z9225YSoAM1GVFeFQ5Jr')
+        imagen_ia_url3 = generar_imagen_vyro(f'Generate a hyperrealistic image of a {job_description}', 'vk-sYFsLKPBxj7VAs89pdQxfzlviGMF58Dh0roVhI8magBM3')
         print(imagen_ia_url3)
         if not all([imagen_ia_url, imagen_ia_url2, imagen_ia_url3]):
             return HttpResponse("Error generando las imágenes", status=500)

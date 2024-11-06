@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 html,
 body {
     height: 100%;
@@ -20,6 +22,63 @@ body {
     flex-wrap: wrap;
     padding: 20px;
     flex: 1;
+}
+
+.container-titulo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
+}
+
+/* Background Circles */
+.circle {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #002f6c, #00E0FF);
+    position: absolute;
+    filter: blur(100px);
+    opacity: 1;
+    z-index: -100;
+}
+
+.circleDos {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, #00E0FF, #30c4ab);
+    position: absolute;
+    filter: blur(100px);
+    opacity: 1;
+    z-index: -100;
+
+}
+
+.circle.one {
+    top: -200px;
+    left: -400px;
+    z-index: -100;
+}
+
+.circle.two {
+    top: -300px;
+    left: 3000px;
+    z-index: -100;
+}
+
+.circleDos.one {
+    top: -300px;
+    left: 1400px;
+    z-index: -100;
+}
+
+.circleDos.two {
+    top: -700px;
+    left: 1500px;
+    z-index: -100;
 }
 
 .poster-wrapper {
@@ -238,6 +297,17 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.nav-link{
+    color: #000000;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-right: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
 /* Sección de Descarga */
 .download-section {
     display: flex;
@@ -290,6 +360,33 @@ body {
 .download-button:hover {
     background-color: #00bf63;
     color: #fff;
+}
+
+.textoEstiloUno {
+    color: #02015A;
+    font-size: 40px;
+    text-align: center;
+    justify-content: center;
+    max-width: 800px;
+    font-weight: 500;
+    line-height: 110%;
+    padding-bottom: 50px;
+    z-index: 4;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+.textoEstiloDos {
+    color: #4e5774;
+    font-size: 18px;
+    max-width: 800px;
+    font-weight: 400;
+    line-height: 150%;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    z-index: 2;
 }
 
 footer {
