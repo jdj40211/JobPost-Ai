@@ -1,0 +1,244 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa !important;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px; 
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 20px;
+    flex: 1;
+}
+
+.poster-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+/* Plantilla 1 - Estilo Azul y Tipografía Sans-Serif */
+.poster-style-1 {
+    width: 280px;
+    height: 500px;
+    background-color: #f0f8ff;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 10px 20px rgba(0, 0, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1rem;
+    overflow: hidden;
+}
+
+.poster-header-1, .poster-footer-1 {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+}
+
+.tituloPlantilla1 {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.poster-footer-1 p {
+    color: #ffffff;
+    margin: 0;
+}
+
+.poster-style-1 .like-button {
+    background-color: #007bff;
+}
+
+.poster-style-1 .dislike-button {
+    background-color: #ff4d4d;
+}
+
+/* Plantilla 2 - Estilo Naranja y Tipografía Serif */
+.poster-style-2 {
+    width: 280px;
+    height: 500px;
+    background-color: #fff7e6;
+    font-family: 'Merriweather', serif;
+    box-shadow: 0 10px 20px rgba(255, 165, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.poster-header-2, .poster-footer-2 {
+    background-color: #ff8c00;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+}
+
+.tituloPlantilla2 {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.poster-footer-2 p {
+    color: #ffffff;
+    margin: 0;
+}
+
+.poster-style-2 .like-button {
+    background-color: #ff8c00;
+}
+
+.poster-style-2 .dislike-button {
+    background-color: #d9534f;
+}
+
+/* Plantilla 3 - Estilo Verde y Tipografía Display */
+.poster-style-3 {
+    width: 280px;
+    height: 500px;
+    background-color: #e6ffe6;
+    font-family: 'Lobster', cursive;
+    box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.poster-header-3, .poster-footer-3 {
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 10px;
+    text-align: center;
+}
+
+.tituloPlantilla3 {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.poster-footer-3 p {
+    color: #ffffff;
+    margin: 0;
+}
+
+.poster-container {
+    width: 280px;
+    height: 500px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.poster-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Sección de imagen */
+.image-section {
+    width: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.vacante-imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Estilo de los botones */
+.like-dislike {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.like-button{
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+.dislike-button {
+    background-color: #dc3545; /* Rojo para "No me gusta" */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+.like-button:hover,
+.dislike-button:hover {
+    background-color: #0056b3;
+}
+
+/* Navbar */
+.navbar-bg-body-tertiary {
+    z-index: 1;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    position: sticky;
+}
+
+.container-fluid {
+    display: flex;
+    background-color: #e7e9ec;
+    color: #000000;
+    padding: 10px 20px;
+    margin: 20px auto;
+    border-radius: 100px;
+    width: 50%;
+    justify-content: space-between;
+    z-index: 2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: #1f41bb;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+}

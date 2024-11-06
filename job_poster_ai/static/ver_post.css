@@ -1,0 +1,232 @@
+/* Navbar */
+.navbar-bg-body-tertiary {
+    z-index: 1;
+    background-color: transparent;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+.container-fluid {
+    display: flex;
+    background-color: #e7e9ec;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 100px;
+    justify-content: space-between;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+}
+
+/* Contenedor reducido para las plantillas */
+.container.mb-4 {
+    max-width: 360px; /* Ajuste de ancho */
+    height: 740px; /* Ajuste de alto */
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.containerIgPost,
+.post {
+    width: 360px;
+    height: 740px;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.headerIgPost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.headerIcons {
+    display: flex;
+    align-items: center;
+}
+
+.headerIcons i {
+    font-size: 24px;
+    color: #f06529;
+    margin-right: 10px;
+}
+
+.headerIcons div {
+    display: flex;
+    flex-direction: column;
+}
+
+.headerIcons span {
+    font-size: 14px;
+}
+
+.imgIgPost img, .content__image{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.iconsIgPost {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+}
+
+.iconsIgPost i {
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.iconsIgPost i:hover {
+    color: #f06529;
+}
+
+.footerIgPost {
+    padding: 0 15px 15px 15px;
+}
+
+.footerIgPost p {
+    margin: 5px 0;
+}
+
+.footerIgPost strong {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.poster-dynamic-content {
+    padding: 10px;
+    border-top: 1px solid #dbdbdb;
+    background-color: #fafafa;
+}
+
+
+
+.post__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2rem 1.6rem 0 1.6rem;
+}
+
+.header__left {
+    flex: 1;
+}
+
+.author__name:hover,
+.post__date:hover {
+    text-decoration: underline;
+}
+
+.author__verified,
+.post__privacy,
+.options__icon {
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.post__author-pic {
+    float: left;
+    width: 4rem;
+    height: 4rem;
+    margin-right: 0.8rem;
+    border-radius: 50%;
+    box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.2);
+    transition: filter 0.2s ease;
+}
+
+.post__author {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #050505;
+}
+
+.post__date {
+    display: block;
+    float: left;
+    font-size: 1rem;
+    color: #1c1e21;
+}
+
+.post__content {
+    padding: 1rem 1.6rem;
+}
+
+.content__paragraph {
+    font-size: 1.2rem;
+}
+
+.footer__reactions,
+.footer__buttons,
+.footer__comments {
+    padding: 0.8rem 1.6rem;
+    color: #65676b;
+    font-size: 1.2rem;
+}
+
+.footer__buttons {
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.publish-button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    background-color: #1877f2;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 5px;
+}
+
+.publish-button:hover {
+    background-color: #155baf;
+}
+
+
+/* Footer */
+footer {
+    width: 100%;
+    background-color: #1f41bb;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    font-size: 14px;
+}

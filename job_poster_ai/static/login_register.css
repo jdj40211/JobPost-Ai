@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #02015A;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.titulo-principal {
+    color: #02015A;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.lead {
+    color: #4e5774;
+    font-size: 18px;
+    max-width: 80%;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.tituloFormulario{
+    font-size: 24px;
+    font-weight: 600;
+    color: #02015A;
+    margin-bottom: 20px;
+    padding-top: 50px;
+    font-family: 'Poppins', sans-serif;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 20px;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #02015A;
+    box-shadow: 0 0 8px rgba(2, 1, 90, 0.2);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #00bf63;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+button[type="submit"]:hover {
+    background-color: #00587a;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    color: #00587a;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+
+a:hover {
+    text-decoration: underline;
+}

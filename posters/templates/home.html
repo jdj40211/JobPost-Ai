@@ -62,9 +62,10 @@
             <button class="botonDemo" onclick="location.href='{% url 'login' %}'">Crear Oferta</button>
         </div>
     </div>
-
     <div class="containerCarousel">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <!-- Contenedor del Carrusel -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <!-- Contenido del Carrusel -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img class="d-block w-100" src="{% static 'images/testimonio1.svg' %}" alt="First slide">
@@ -76,57 +77,88 @@
                     <img class="d-block w-100" src="{% static 'images/testimonio3.svg' %}" alt="Third slide">
                 </div>
             </div>
+
+            <!-- Controles (Flechas) -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+
+        <!-- Indicadores debajo del contenedor -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
         </div>
     </div>
-
 
 
     <div class="containerSeccionDos">
         <div class="contenedorDos">
             <div class="textoEstiloDos">Recomendado por las más grandes empresas</div>
-            <div class="logo-carousel">
-                <div class="logo-carousel-track">
-                    <!-- Actual logos -->
-                    <img src="{% static 'images/logoSura.svg' %}" alt="Logo Sura" class="carousel-logo">
-                    <img src="{% static 'images/logoExito.svg' %}" alt="Logo Exito" class="carousel-logo">
-                    <img src="{% static 'images/logoStar.svg' %}" alt="Logo Star" class="carousel-logo">
-                    <img src="{% static 'images/logoWom.svg' %}" alt="Logo Wom" class="carousel-logo">
-                    <img src="{% static 'images/logoIsa.svg' %}" alt="Logo Isa" class="carousel-logo">
-                    <img src="{% static 'images/logoConfama.svg' %}" alt="Logo Confama" class="carousel-logo">
-                    <img src="{% static 'images/logoHaceb.svg' %}" alt="Logo Haceb" class="carousel-logo">
-                    <img src="{% static 'images/logoAra.svg' %}" alt="Logo Ara" class="carousel-logo">
+            <div class="wrapper">
+                <div class="logo-track">
+                    <img src="{% static 'images/logoSura.svg' %}" alt="Logo Sura" class="logo1">
+                    <img src="{% static 'images/logoExito.svg' %}" alt="Logo Exito" class="logo2">
+                    <img src="{% static 'images/logoStar.svg' %}" alt="Logo Star" class="logo3">
+                    <img src="{% static 'images/logoWom.svg' %}" alt="Logo Wom" class="logo4">
+                    <img src="{% static 'images/logoIsa.svg' %}" alt="Logo Isa" class="logo5">
+                    <img src="{% static 'images/logoConfama.svg' %}" alt="Logo Confama" class="logo6">
+                    <img src="{% static 'images/logoHaceb.svg' %}" alt="Logo Haceb" class="logo7">
+                    <img src="{% static 'images/logoAra.svg' %}" alt="Logo Ara" class="logo8">
+                    <!-- Duplicamos los elementos para crear el efecto infinito -->
+                    <img src="{% static 'images/logoSura.svg' %}" alt="Logo Sura" class="logo1">
+                    <img src="{% static 'images/logoExito.svg' %}" alt="Logo Exito" class="logo2">
+                    <img src="{% static 'images/logoStar.svg' %}" alt="Logo Star" class="logo3">
+                    <img src="{% static 'images/logoWom.svg' %}" alt="Logo Wom" class="logo4">
+                    <img src="{% static 'images/logoIsa.svg' %}" alt="Logo Isa" class="logo5">
+                    <img src="{% static 'images/logoConfama.svg' %}" alt="Logo Confama" class="logo6">
+                    <img src="{% static 'images/logoHaceb.svg' %}" alt="Logo Haceb" class="logo7">
+                    <img src="{% static 'images/logoAra.svg' %}" alt="Logo Ara" class="logo8">
                 </div>
             </div>
-        </div>
-        <div class="contenedorTres">
-            <div class="gradient-label">Como funciona</div>
-            <h1 class="textoEstiloUno">Crea propuestas de trabajo ganadoras facilmente.</h1>
-            <p class="textoEstiloDos">Herramienta de inteligencia artificial de última generación y fácil de usar y
-                análisis de crecimiento diseñada para impulsar la conversión, la participación y la retención de los
-                usuarios.</p>
 
-            <div class="columnas">
-                <div class="columna">
-                    <img src="{% static 'images/oferta.svg' %}" alt="Crear Oferta" class="iconos">
-                    <h2 class="textoEstiloTres">Crea tu oferta</h2>
-                    <p class="textoEstiloCuatro">Crea tu oferta de trabajo en pocos minutos.</p>
-                </div>
-                <div class="columna">
-                    <img src="{% static 'images/analisis.svg' %}" alt="Analisis" class="iconos">
-                    <h2 class="textoEstiloTres">Análisis</h2>
-                    <p class="textoEstiloCuatro">Recibe un análisis detallado de tu oferta.</p>
-                </div>
-                <div class="columna">
-                    <img src="{% static 'images/contratacion.svg' %}" alt="Contratacion" class="iconos">
-                    <h2 class="textoEstiloTres">Contratación</h2>
-                    <p class="textoEstiloCuatro">Contrata al mejor candidato para tu empresa.</p>
-                </div>
+        </div>
+    </div>
+    <div class="contenedorTres">
+        <div class="gradient-label">Como funciona</div>
+        <h1 class="textoEstiloUno">Crea propuestas de trabajo ganadoras facilmente.</h1>
+        <p class="textoEstiloDos">Herramienta de inteligencia artificial de última generación y fácil de usar y
+            análisis de crecimiento diseñada para impulsar la conversión, la participación y la retención de los
+            usuarios.</p>
+
+        <div class="columnas">
+            <div class="columna">
+                <img src="{% static 'images/oferta.svg' %}" alt="Crear Oferta" class="iconos">
+                <h2 class="textoEstiloTres">Crea tu oferta</h2>
+                <p class="textoEstiloCuatro">Crea tu oferta de trabajo en pocos minutos.</p>
             </div>
-            <button class="botonDemo" onclick="location.href='{% url 'login' %}'">Crear Oferta</button>
+            <div class="columna">
+                <img src="{% static 'images/analisis.svg' %}" alt="Analisis" class="iconos">
+                <h2 class="textoEstiloTres">Análisis</h2>
+                <p class="textoEstiloCuatro">Recibe un análisis detallado de tu oferta.</p>
+            </div>
+            <div class="columna">
+                <img src="{% static 'images/contratacion.svg' %}" alt="Contratacion" class="iconos">
+                <h2 class="textoEstiloTres">Contratación</h2>
+                <p class="textoEstiloCuatro">Contrata al mejor candidato para tu empresa.</p>
+            </div>
         </div>
+        <button class="botonDemo" onclick="location.href='{% url 'login' %}'">Crear Oferta</button>
+    </div>
 
 
-        <script src="{% static 'js/carousel.js' %}"></script>
+    <script src="{% static 'js/carousel.js' %}"></script>
 </body>
 
 <footer>

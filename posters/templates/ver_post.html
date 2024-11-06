@@ -1,321 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram y Facebook Post</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fafafa;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
+    <title>Visualiza tu Post</title>
 
-        .container {
-            display: flex;
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
-            flex-direction: column;
-            align-items: center;
-        }
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'ver_post.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
-        /* Estilos del post de Instagram */
-        .containerIgPost {
-            width: 400px;
-            border: 1px solid #dbdbdb;
-            border-radius: 8px;
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .headerIgPost {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 15px;
-            border-bottom: 1px solid #dbdbdb;
-        }
-
-        .headerIcons {
-            display: flex;
-            align-items: center;
-        }
-
-        .headerIcons i {
-            font-size: 24px;
-            color: #f06529;
-            margin-right: 10px;
-        }
-
-        .headerIcons div {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .headerIcons span {
-            font-size: 14px;
-        }
-
-        .imgIgPost img {
-            width: 100%;
-            height: auto;
-        }
-
-        .iconsIgPost {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 15px;
-        }
-
-        .iconsIgPost i {
-            font-size: 24px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        .iconsIgPost i:hover {
-            color: #f06529;
-        }
-
-        .footerIgPost {
-            padding: 0 15px 15px 15px;
-        }
-
-        .footerIgPost p {
-            margin: 5px 0;
-        }
-
-        .footerIgPost strong {
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .poster-dynamic-content {
-            padding: 10px;
-            border-top: 1px solid #dbdbdb;
-            background-color: #fafafa;
-        }
-
-        /* Estilos del post de Facebook */
-        .post {
-            background: #fff;
-            width: 100%;
-            max-width: 50rem;
-            padding-bottom: 5rem;
-            border-radius: 1rem;
-            box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.2);
-        }
-
-        .post__header {
-            display: flex;
-            justify-content: space-between;
-            padding: 1.2rem 1.6rem 0 1.6rem;
-        }
-
-        .header__left {
-            flex: 1;
-        }
-
-        .author__name:hover,
-        .post__date:hover {
-            text-decoration: underline;
-        }
-
-        .author__verified,
-        .post__privacy,
-        .options__icon {
-            display: inline-block;
-            width: 1.2rem;
-            height: 1.2rem;
-        }
-
-        .post__author-pic {
-            float: left;
-            width: 4rem;
-            height: 4rem;
-            margin-right: 0.8rem;
-            border-radius: 50%;
-            box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.2);
-            transition: filter 0.2s ease;
-        }
-
-        .post__author {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #050505;
-        }
-
-        .post__date {
-            display: block;
-            float: left;
-            font-size: 1.3rem;
-            color: #1c1e21;
-        }
-
-        .post__content {
-            padding: 1rem 1.6rem;
-        }
-
-        .content__paragraph {
-            font-size: 1.5rem;
-        }
-
-        .content__image {
-            width: 100%;
-            height: 33rem;
-            object-fit: cover;
-            display: block;
-        }
-
-        .footer__reactions,
-        .footer__buttons,
-        .footer__comments {
-            padding: 0.8rem 1.6rem;
-            color: #65676b;
-            font-size: 1.5rem;
-        }
-
-        .footer__buttons {
-            display: flex;
-            justify-content: space-evenly;
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .publish-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            background-color: #1877f2;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px 5px;
-        }
-
-        .publish-button:hover {
-            background-color: #155baf;
-        }
-    </style>
+    <!-- Navbar -->
+    <nav class="navbar-bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/JobPostLogo(500x150).svg' %}" alt="JobPostLogo" width="150" height="50"
+                    class="logoJobPost">
+            </a>
+            <a class="nav-link" href="{% url 'home' %}">Soporte</a>
+        </div>
+    </nav>
 </head>
+
 <body>
-    <div class="container">
-        <!-- Instagram Post -->
-        <div class="containerIgPost">
-            <div class="headerIgPost">
-                <div class="headerIcons">
-                    <i class="fa-brands fa-html5"></i>
-                    <div>
-                        <span><strong>Instagram</strong></span>
-                        <span>Magneto</span>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row">
+            <!-- Left Section: Text and Images -->
+            <section class="col-md-6">
+                <h2 class="mb-4">Información del Post</h2>
+                <p>Aquí puedes añadir el texto descriptivo, las instrucciones o cualquier información adicional que
+                    quieras mostrar al usuario sobre cómo se verá su publicación.</p>
+                <p>También puedes incluir alguna imagen representativa o ilustrativa.</p>
+                <img src="{% static 'images/example-image.jpg' %}" alt="Ejemplo de imagen" class="img-fluid mb-4">
+                <p>Descripción detallada o instrucciones adicionales sobre cómo se verán las publicaciones en redes
+                    sociales.</p>
+            </section>
+
+            <!-- Right Section: Templates for Instagram and Facebook Posts -->
+            <section class="col-md-6">
+                <h2 class="text-center my-5">Visualiza tu Post</h2>
+
+                <!-- Instagram Post Container -->
+                <div class="container mb-4">
+                    <div class="border rounded shadow p-3">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fa-brands fa-html5 me-2"></i>
+                                <div>
+                                    <strong>Instagram</strong><br>
+                                    <span>Magneto</span>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                        <div class="poster-dynamic-content">
+                            {{ poster_html|safe }}
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div>
+                                <i class="fa-regular fa-heart me-3"></i>
+                                <i class="fa-regular fa-comment me-3"></i>
+                                <i class="fa-regular fa-paper-plane"></i>
+                            </div>
+                            <i class="fa-regular fa-bookmark"></i>
+                        </div>
+                        <div class="mt-3">
+                            <p>Liked by <strong>Magneto</strong>, <strong>HTML5</strong>, <strong>Web</strong> and
+                                <strong>100,000 others</strong></p>
+                            <p>{{ job_description }}</p>
+                        </div>
                     </div>
                 </div>
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-            </div>
 
-            <div class="poster-dynamic-content">
-                {{ poster_html|safe }}
-            </div>
-
-            <div class="iconsIgPost">
-                <div>
-                    <i class="fa-regular fa-heart"></i>
-                    <i class="fa-regular fa-comment"></i>
-                    <i class="fa-regular fa-paper-plane"></i>
-                </div>
-                <i class="fa-regular fa-bookmark"></i>
-            </div>
-
-            <div class="footerIgPost">
-                <p>Liked by <strong>Magneto</strong>, <strong>HTML5</strong>, <strong>Web</strong> and <strong>100,000 others</strong></p>
-                <p>{{ job_description }}</p>
-            </div>
-        </div>
-
-        <!-- Facebook Post -->
-        <div class="post">
-            <div class="post__header header">
-                <div class="header__left">
-                    <img src="./images/author-pic.jpg" class="post__author-pic" />
-                    <div class="post__author author">
-                        <span class="author__name"><a href="#">Magneto</a></span>
+                <!-- Facebook Post Container -->
+                <div class="container mb-4">
+                    <div class="border rounded shadow p-3">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="d-flex align-items-center">
+                                <img src="{% static 'images/author-pic.jpg' %}" class="rounded-circle me-2" width="40"
+                                    height="40">
+                                <div>
+                                    <strong><a href="#">Magneto</a></strong><br>
+                                    <small id="current-date"></small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                        <div class="poster-dynamic-content">
+                            {{ poster_html|safe }}
+                        </div>
+                        <div class="mt-3">
+                            <p class="mb-1">{{ job_description }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                            <span class="text-muted"><a href="#">193K</a> reactions</span>
+                            <span class="text-muted"><a href="#">50K Comments</a> · <a href="#">5.4K Shares</a></span>
+                        </div>
+                        <div class="d-flex justify-content-around mt-2">
+                            <button class="btn btn-light w-100 me-2"><i class="fa-regular fa-thumbs-up"></i>
+                                Like</button>
+                            <button class="btn btn-light w-100 me-2"><i class="fa-regular fa-comment"></i>
+                                Comment</button>
+                            <button class="btn btn-light w-100"><i class="fa-solid fa-share"></i> Share</button>
+                        </div>
                     </div>
-                    <span class="post__date"><a href="#" id="current-date"></a></span>
                 </div>
-                <div class="header__right">
-                    <i class="options__icon"></i>
-                </div>
-            </div>
 
-            <div class="post__content content">
-                <p class="content__paragraph">{{ job_description }}</p>
-                <div class="poster-dynamic-content">
-                    {{ poster_html|safe }}
+                <!-- Publish Buttons -->
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary mx-2" onclick="publicarEnInstagram()">Publicar en Instagram</button>
+                    <button class="btn btn-primary mx-2" onclick="publicarEnFacebook()">Publicar en Facebook</button>
                 </div>
-            </div>
-
-            <div class="post__footer footer">
-                <div class="footer__reactions reactions">
-                    <span class="emojis__count"><a href="#">193K</a></span>
-                    <span class="comment-shares__comments"><a href="#">50K Comments</a></span>
-                    <span class="comment-shares__shares"><a href="#">5.4K Shares</a></span>
-                </div>
-                <div class="footer__buttons buttons">
-                    <span class="buttons__like like"><i class="like__icon"></i>Like</span>
-                    <span class="buttons__comment comment"><i class="comment__icon"></i>Comment</span>
-                    <span class="buttons__share share"><i class="share__icon"></i>Share</span>
-                </div>
-            </div>
+            </section>
         </div>
-    </div>
+    </main>
 
-    <button class="publish-button" onclick="publicarEnInstagram()">Publicar en Instagram</button>
-    <button class="publish-button" onclick="publicarEnFacebook()">Publicar en Facebook</button>
-
-    <script>
-        function publicarEnInstagram() {
-            const imageUrl = "{{ image_url }}";
-            const caption = "{{ job_description }}";
-
-            fetch("{% url 'publicar_poster_instagram' %}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": "{{ csrf_token }}"
-                },
-                body: JSON.stringify({
-                    image_url: imageUrl,
-                    caption: caption
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === "success") {
-                    alert("El post se ha publicado exitosamente en Instagram.");
-                } else {
-                    alert("Error al publicar el post: " + data.message);
-                }
-            })
-            .catch(error => {
-                console.error("Error al publicar en Instagram:", error);
-                alert("Ocurrió un error al intentar publicar en Instagram.");
-            });
-        }
-
-        
-
-        const dateElement = document.getElementById('current-date');
-        const today = new Date();
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        dateElement.textContent = today.toLocaleDateString('en-US', options);
-    </script>
+    <script src="{% static 'js/ver_post.js' %}"></script>
 </body>
+
+<footer class="bg-primary text-white text-center py-3 mt-5">
+    <p>© 2024 JobPost + AI. Todos los derechos reservados.</p>
+</footer>
+
 </html>

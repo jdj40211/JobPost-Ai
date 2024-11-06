@@ -6,10 +6,12 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     width: 100%;
-    overflow-x: hidden; /* Prevents horizontal scrolling */
+    overflow-x: hidden;
+    /* Prevents horizontal scrolling */
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
 }
@@ -33,7 +35,8 @@ h1 {
     justify-content: center;
     align-items: center;
     padding-top: 50px;
-    overflow: hidden; /* Prevents content from overflowing */
+    overflow: hidden;
+    /* Prevents content from overflowing */
 }
 
 
@@ -47,14 +50,15 @@ h1 {
     background-color: #f8f9fa;
 }
 
+
 .contenedorTres {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centers content vertically */
-    align-items: center; /* Centers content horizontally */
+    justify-content: center;
+    align-items: center;
     width: 50%;
-    height: 100vh; /* Full viewport height */
-    margin: 0 auto; /* Centers content horizontally within its parent */
+    height: 100vh;
+    margin: 80px auto;
     text-align: center;
 }
 
@@ -63,10 +67,11 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 16px; /* Adjust spacing between elements */
+    gap: 16px;
+    /* Adjust spacing between elements */
     width: 50%;
     height: 100vh;
-    margin: 0 auto;
+    margin-top: 50px;
     text-align: center;
 }
 
@@ -76,8 +81,10 @@ h1 {
     padding: 5px 12px;
     font-size: 14px;
     font-family: 'Poppins', sans-serif;
-    background-color: #f3f7fb; /* Solid background color */
-    color: transparent; /* Make text transparent */
+    background-color: #f3f7fb;
+    /* Solid background color */
+    color: transparent;
+    /* Make text transparent */
     border-radius: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -87,7 +94,7 @@ h1 {
 }
 
 .gradient-label::before {
-    content: "Como funciona"; 
+    content: "Como funciona";
     position: absolute;
     top: 0;
     left: 0;
@@ -163,7 +170,8 @@ h1 {
     transition: background-color 0.3s ease, color 0.3s ease;
     cursor: pointer;
     display: block;
-    margin: 0 auto; /* Esto centra el botón horizontalmente */
+    margin: 0 auto;
+    /* Esto centra el botón horizontalmente */
 }
 
 
@@ -250,125 +258,163 @@ label {
     left: 1500px;
 }
 
-/* Carousel Container */
 .containerCarousel {
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-    width: 100%;
     position: relative;
-    padding-bottom: 100px;
+    width: 100%;
     padding-top: 50px;
+    padding-bottom: 50px; /
+}
+
+.carousel {
+    position: relative;
 }
 
 .carousel-item {
     background-color: transparent;
-    padding: 20px;
-    border-radius: 8px;
     text-align: center;
 }
 
 .carousel-item img {
     width: 100%;
     max-height: 70vh;
+    object-fit: contain;
 }
 
-/* Logo Carousel Container */
-.logo-carousel {
-    overflow: hidden;
-    justify-content: center;
-    width: 100%;
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 5%; 
+    background: none;
+    border: none;
+    opacity: 1;
     display: flex;
     align-items: center;
-    margin: 20px auto;
-    position: relative;
-    padding-bottom: 50px;
-    padding-top: 50px;
+    justify-content: center;
 }
 
-/* Track that holds all logos */
-.logo-carousel-track {
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-image: none; 
+    border: solid blue;
+    border-width: 0 6px 6px 0;
+    display: inline-block;
+    padding: 10px;
+}
+
+.carousel-control-prev-icon {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.carousel-control-next-icon {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    border-color: blue;
+}
+
+.carousel-indicators {
+    position: relative;
+    bottom: 0;
+    margin-top: 20px;
     display: flex;
-    gap: 30px;
-    white-space: nowrap;
+    justify-content: center;
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: #000; 
+}
+
+.carousel-indicators .active {
+    background-color: #fff; 
+}
+
+
+
+/* Carrusel Logos*/
+
+.wrapper {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+
+.logo-track {
+    display: flex;
+    width: calc(150px * 16);
     animation: scroll 30s linear infinite;
 }
 
-/* Individual logo styling */
-.carousel-logo {
-    width: 100px;
-    height: auto;
+.logo-track img {
+    width: 150px;
+    flex-shrink: 0;
     filter: grayscale(100%);
     transition: filter 0.3s ease;
 }
 
-.carousel-logo:hover {
+.logo-track img:hover {
     filter: grayscale(0%);
 }
 
-/* Fading effect for smooth edges */
-.logo-carousel:before,
-.logo-carousel:after {
-    position: absolute;
-    top: 0;
-    width: 100px;
-    height: 100%;
-    content: "";
-    z-index: 2;
-}
-
-.logo-carousel:before {
-    left: 0;
-    background: linear-gradient(to left, rgba(255, 255, 255, 0), white);
-}
-
-.logo-carousel:after {
-    right: 0;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), white);
-}
-
-/* Keyframes for scrolling animation */
 @keyframes scroll {
-    from {
+    0% {
         transform: translateX(0);
     }
-    to {
-        transform: translateX(-100%);
+
+    100% {
+        transform: translateX(calc(-150px * 8));
     }
 }
+
+
 
 .columnas {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Creates 3 equal-width columns */
-    gap: 40px; /* Adds space between the items */
-    justify-items: center; /* Centers items horizontally within each column */
-    margin-top: 40px; /* Adds space above the grid */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    justify-items: center;
+    margin-top: 40px;
 }
 
 .columna {
-    text-align: center; /* Centers text and images within each column */
-    max-width: 250px; /* Optional: limits the width of each column */
+    text-align: center;
+    max-width: 250px;
 }
 
 .iconos {
-    width: 60px; /* Adjust the size of the icons */
+    width: 60px;
     height: auto;
-    margin-bottom: 16px; /* Adds space below each icon */
+    margin-bottom: 16px;
 }
 
 .textoEstiloTres {
     font-size: 20px;
     font-weight: bold;
-    color: #02015A; /* Dark blue color for the title */
+    color: #02015A;
     margin-bottom: 8px;
 }
 
 .textoEstiloCuatro {
     font-size: 14px;
-    color: #4e5774; /* Lighter gray color for the description */
+    color: #4e5774;
     line-height: 1.5;
 }
-
 
 /* Footer */
 .footer {

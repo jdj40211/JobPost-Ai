@@ -1,223 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Póster de Vacante</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  <title>Plantilla de Vacante</title>
+  <link rel="stylesheet" href="{% static 'nueva_plantilla.css' %}">
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #e0f7fa;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      margin: 0;
-    }
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 
-    .container {
-      width: 100%;
-      display: flex;
-      flex-direction: row; /* Cambiado a fila */
-      gap: 20px; /* Espacio entre posters */
-      justify-content: center;
-      align-items: flex-start;
-      flex-wrap: wrap; /* Permite que se ajuste en pantallas pequeñas */
-    }
+  <nav class="navbar-bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'images/JobPostLogo(500x150).svg' %}" alt="JobPostLogo" width="150" height="50"
+          class="logoJobPost">
+      </a>
+      <a class="nav-link" href="{% url 'home' %}">Soporte</a>
+    </div>
+  </nav>
 
-    /* Estilo general para los contenedores de póster */
-    .poster-container {
-      width: 250px; /* Tamaño reducido */
-      background-color: white;
-      border-radius: 15px;
-      padding: 20px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      font-size: 0.9rem; /* Tamaño de fuente reducido */
-    }
-
-    .poster-container:hover {
-      transform: scale(1.02);
-      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Estilos específicos para cada póster */
-    .poster-style-1 { border: 5px solid #007bff; }
-    .poster-style-1 .header { background-color: #007bff; color: white; }
-
-    .poster-style-2 { border: 5px solid #ff5722; }
-    .poster-style-2 .header { background-color: #ff5722; color: white; }
-
-    .poster-style-3 { border: 5px solid #4caf50; }
-    .poster-style-3 .header { background-color: #4caf50; color: white; }
-
-    .header h1 { font-size: 1.5rem; margin: 0; }
-    
-    .image-section {
-      text-align: center;
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 10px 0;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .vacante-imagen {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .content { margin: 10px 0; text-align: justify; }
-    .content h2 { font-size: 1.2rem; margin-bottom: 10px; }
-    .content p { font-size: 1rem; color: #333; line-height: 1.4; }
-
-    .footer { text-align: center; font-size: 0.9rem; color: inherit; margin-top: 10px; padding-top: 10px; }
-
-    .like-dislike {
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .like-button, .dislike-button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-      margin: 5px;
-    }
-
-    .like-button:hover, .dislike-button:hover {
-      background-color: #0056b3;
-    }
-  </style>
 </head>
 
 <body>
+
+
   <div class="container">
     <!-- Primer estilo de póster -->
-    <div class="poster-container poster-style-1" id="poster-container-1">
-      <div class="header">
-        <h1>Vacante: {{ job_title }}</h1>
-      </div>
-      <div class="image-section">
-        <img src="{{ MEDIA_URL }}{{ poster_url }}" alt="Imagen generada por IA" class="vacante-imagen">
-      </div>
-      
-      <div class="footer">
-        <p>Para más información, contacta a: {{ contact_info }}</p>
+    <div class="poster-wrapper">
+      <div class="poster-container poster-style-1" id="poster-container-1">
+        <div class="row poster-header-1">
+          <div class="col-12 d-flex justify-content-center align-items-center">
+            <h1 class="tituloPlantilla1">¿Eres {{ job_title }} y no tienes empleo? ¡Esta es tu oportunidad!</h1>
+          </div>
+        </div>
+        <div class="row image-section">
+          <div class="col-12 p-0">
+            <img src="{{ MEDIA_URL }}{{ poster_url }}" alt="Imagen generada por IA" class="vacante-imagen">
+          </div>
+        </div>
+        <div class="row poster-footer-1">
+          <div class="col-12 text-center">
+            <p>Para más información, contacta a: {{ contact_info }}</p>
+          </div>
+        </div>
       </div>
       <div class="like-dislike">
         <form method="POST" action="{% url 'guardar_y_mostrar_post' %}">
-            {% csrf_token %}
-            <input type="hidden" name="poster_html" id="posterHtml1">
-            <input type="hidden" name="selection" id="selection1">
-            <button type="button" class="like-button" onclick="submitLike(1)">Me gusta</button>
-            <button type="submit" name="selection" value="dislike" class="dislike-button">No me gusta</button>
+          {% csrf_token %}
+          <input type="hidden" name="poster_html" id="posterHtml1">
+          <input type="hidden" name="selection" id="selection1">
+          <button type="button" class="like-button" onclick="submitLike(1)">Me gusta</button>
+          <button type="submit" name="selection" value="dislike" class="dislike-button">No me gusta</button>
         </form>
       </div>
     </div>
 
     <!-- Segundo estilo de póster -->
-    <div class="poster-container poster-style-2" id="poster-container-2">
-      <div class="header">
-        <h1>Vacante: {{ job_title }}</h1>
-      </div>
-      <div class="image-section">
-        <img src="{{ MEDIA_URL }}{{ poster_url }}" alt="Imagen generada por IA" class="vacante-imagen">
-      </div>
-      
-      <div class="footer">
-        <p>Para más información, contacta a: {{ contact_info }}</p>
+    <div class="poster-wrapper">
+      <div class="poster-container poster-style-2" id="poster-container-2">
+        <div class="row poster-header-2">
+          <div class="col-12 d-flex justify-content-center align-items-center">
+            <h1 class="tituloPlantilla2">¡Atención {{ job_title }}! Una gran vacante te espera.</h1>
+          </div>
+        </div>
+        <div class="row image-section">
+          <div class="col-12 p-0">
+            <img src="{{ MEDIA_URL }}{{ poster_url }}" alt="Imagen generada por IA" class="vacante-imagen">
+          </div>
+        </div>
+        <div class="row poster-footer-2">
+          <div class="col-12 text-center">
+            <p>Para más información, contacta a: {{ contact_info }}</p>
+          </div>
+        </div>
       </div>
       <div class="like-dislike">
         <form method="POST" action="{% url 'guardar_y_mostrar_post' %}">
-            {% csrf_token %}
-            <input type="hidden" name="poster_html" id="posterHtml2">
-            <input type="hidden" name="selection" id="selection2">
-            <button type="button" class="like-button" onclick="submitLike(2)">Me gusta</button>
-            <button type="submit" name="selection" value="dislike" class="dislike-button">No me gusta</button>
+          {% csrf_token %}
+          <input type="hidden" name="poster_html" id="posterHtml2">
+          <input type="hidden" name="selection" id="selection2">
+          <button type="button" class="like-button" onclick="submitLike(2)">Me gusta</button>
+          <button type="submit" name="selection" value="dislike" class="dislike-button">No me gusta</button>
         </form>
       </div>
     </div>
 
     <!-- Tercer estilo de póster -->
-    <div class="poster-container poster-style-3" id="poster-container-3">
-      <div class="header">
-        <h1>Vacante: {{ job_title }}</h1>
-      </div>
-      <div class="image-section">
-        <img src="{{ MEDIA_URL }}{{ poster_url }}" alt="Imagen generada por IA" class="vacante-imagen">
-      </div>
-      
-      <div class="footer">
-        <p>Para más información, contacta a: {{ contact_info }}</p>
+    <div class="poster-wrapper">
+      <div class="poster-container poster-style-3" id="poster-container-3">
+        <div class="row poster-header-3">
+          <div class="col-12 d-flex justify-content-center align-items-center">
+            <h1 class="tituloPlantilla3">¿Buscas trabajo como {{ job_title }}? Aplica hoy y transforma tu carrera.</h1>
+          </div>
+        </div>
+        <div class="row image-section">
+          <div class="col-12 p-0">
+            <img src="{{ MEDIA_URL }}{{ poster_url }}" alt="Imagen generada por IA" class="vacante-imagen">
+          </div>
+        </div>
+        <div class="row poster-footer-3">
+          <div class="col-12 text-center">
+            <p>Para más información, contacta a: {{ contact_info }}</p>
+          </div>
+        </div>
       </div>
       <div class="like-dislike">
         <form method="POST" action="{% url 'guardar_y_mostrar_post' %}">
-            {% csrf_token %}
-            <input type="hidden" name="poster_html" id="posterHtml3">
-            <input type="hidden" name="selection" id="selection3">
-            <button type="button" class="like-button" onclick="submitLike(3)">Me gusta</button>
-            <button type="submit" name="selection" value="dislike" class="dislike-button">No me gusta</button>
+          {% csrf_token %}
+          <input type="hidden" name="poster_html" id="posterHtml3">
+          <input type="hidden" name="selection" id="selection3">
+          <button type="button" class="like-button" onclick="submitLike(3)">Me gusta</button>
+          <button type="submit" name="selection" value="dislike" class="dislike-button">No me gusta</button>
         </form>
       </div>
     </div>
   </div>
 
-  <script>
-  function submitLike(postNumber) {
-    // Captura el contenido del <head>, incluyendo el <style>
-    const headContent = document.head.innerHTML;
-
-    // Clona el contenedor del póster para no modificar el DOM original
-    const posterContainer = document.getElementById('poster-container-' + postNumber).cloneNode(true);
-
-    // Remueve el formulario de "Me gusta" y "No me gusta"
-    const likeDislikeSection = posterContainer.querySelector('.like-dislike');
-    if (likeDislikeSection) {
-      likeDislikeSection.remove();
-    }
-
-    // Combina el contenido del <head> con el <body> para formar el HTML completo
-    const fullHtml = `
-      <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Póster de Vacante</title>
-          ${headContent}
-        </head>
-        <body>
-          ${posterContainer.outerHTML}
-        </body>
-      </html>`;
-
-    // Asigna el HTML completo al campo oculto del formulario
-    document.getElementById('posterHtml' + postNumber).value = fullHtml;
-
-    // Cambia el valor de 'selection' a 'like' y envía el formulario
-    document.getElementById('selection' + postNumber).value = 'like';
-    document.getElementById('posterHtml' + postNumber).closest('form').submit();
-  }
-</script>
 
 
+
+  <script src="{% static 'js/nueva_plantilla.js' %}"></script>
 </body>
+
+<footer>
+  <div class="footer">
+    <p>© 2024 JobPost + AI. Todos los derechos reservados.</p>
+  </div>
 
 </html>
